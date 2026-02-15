@@ -8,6 +8,10 @@ export async function createUser(name: string){
     return result
 }
 
+export async function getById(id: string){
+    return await db.select().from(users).where(eq(users.id, id))
+}
+
 export async function getByName(name: string){
     return await db.select().from(users).where(eq(users.name, name))
 }
