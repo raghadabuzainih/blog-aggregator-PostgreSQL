@@ -10,6 +10,8 @@ import { addFeedHandler } from './commandHandlers/addFeed.js'
 import { feedsHandler } from './commandHandlers/getFeeds.js'
 import { followHandler } from './commandHandlers/follow.js'
 import { followingHandler } from './commandHandlers/following.js'
+import { getLoggedUserMiddleWare } from './shared/getLoggedUser.js'
+import { unFollowHandler } from './commandHandlers/unfollow.js'
 
 async function main() {
   let commandsRegistry: CommandsRegistry= {}
@@ -27,10 +29,11 @@ async function main() {
   await registerCommand(commandsRegistry, 'reset', handlerReset)
   await registerCommand(commandsRegistry, 'users', handlerUsers)
   await registerCommand(commandsRegistry, 'agg', aggHandler)
-  await registerCommand(commandsRegistry, 'addfeed', addFeedHandler)
+  await registerCommand(commandsRegistry, 'addfeed', await getLoggedUserMiddleWare(addFeedHandler))
   await registerCommand(commandsRegistry, 'feeds', feedsHandler)
-  await registerCommand(commandsRegistry, 'follow', followHandler)
-  await registerCommand(commandsRegistry, 'following', followingHandler)
+  await registerCommand(commandsRegistry, 'follow', await getLoggedUserMiddleWare(followHandler))
+  await registerCommand(commandsRegistry, 'following', await getLoggedUserMiddleWare(followingHandler))
+  await registerCommand(commandsRegistry, 'unfollow', await getLoggedUserMiddleWare(unFollowHandler))
 
   try {
     await runCommand(commandsRegistry, cmdName, ...cmdArgs);
