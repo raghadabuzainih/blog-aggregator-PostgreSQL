@@ -1,4 +1,4 @@
-import type {CommandsRegistry} from './commandsRegistry.js'
+import type {CommandsRegistry} from './types/commandsRegistry.js'
 import {runCommand} from './runCommand.js'
 import { registerCommand } from './registerCommand.js'
 import { registerHandler } from './commandHandlers/register.js'
@@ -6,6 +6,7 @@ import { handlerReset } from './commandHandlers/reset.js'
 import { handlerUsers } from './commandHandlers/users.js'
 import { aggHandler } from './commandHandlers/agg.js'
 import { handlerLogin } from './commandHandlers/login.js'
+import { addFeedHandler } from './commandHandlers/feed.js'
 
 async function main() {
   let commandsRegistry: CommandsRegistry= {}
@@ -22,6 +23,7 @@ async function main() {
   await registerCommand(commandsRegistry, 'reset', handlerReset)
   await registerCommand(commandsRegistry, 'users', handlerUsers)
   await registerCommand(commandsRegistry, 'agg', aggHandler)
+  await registerCommand(commandsRegistry, 'addfeed', addFeedHandler)
 
   try {
     await runCommand(commandsRegistry, cmdName, ...cmdArgs);
