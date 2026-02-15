@@ -1,20 +1,16 @@
-import { readConfig } from "config";
+import { createFeedFollows } from "src/lib/db/queries/feedfollows";
 import { createFeed } from "src/lib/db/queries/feeds";
-import { getByName } from "src/lib/db/queries/users";
+import { getLoggedUser } from "src/shared/getLoggedUser";
 import { Feed } from "src/types/feed";
 import { User } from "src/types/user";
-
-export async function getLoggedUser(){
-    const userName = readConfig().currentUserName
-    if(!userName) throw new Error('no user log in')
-    const [user] = await getByName(userName)
-    return user
-}
 
 export async function addFeedHandler(cmdName: string, ...args: string[]){
     const user = await getLoggedUser()
     if(!args[0] || !args[1]) throw new Error('name or url not found')
     const feed = await createFeed(args[0], args[1], user.id)
+    const feedFollow = await createFeedFollows(user.id, feed[0].id)
+    console.log('feed Name: ', feed[0].name)
+    console.log('current user name: ', user.name)
     printFeed(user, feed[0])
 }
 
