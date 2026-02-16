@@ -22,19 +22,19 @@ A command-line blog aggregation tool built with **TypeScript**, **Node.js**, and
 ---
 
 # Command Responsibilities
-- Note: You can run command using 'npm run <commandName>', for ex: npm run following
+- Note: You can run command using 'npm run commandName', for ex: npm run following
 - Below is the responsibility of each command in the CLI:
 
 ## Authentication & User Management
 
-### register
+### register:
 
 Creates a new user in the database.
 
 - Checks if the username already exists.
 - Inserts new user record.
 
-### login
+### login:
 
 Logs in an existing user.
 
@@ -50,7 +50,7 @@ Logs in an existing user.
 
 ### feeds: Displays all available feeds in the system.
 
-### follow
+### follow:
 
 Allows a user to follow a feed.
 
@@ -62,7 +62,7 @@ Allows a user to follow a feed.
 
 ### following: Displays feeds that the current user follows.
 
-### agg
+### agg:
 
 Starts continuous RSS scraping.
 
