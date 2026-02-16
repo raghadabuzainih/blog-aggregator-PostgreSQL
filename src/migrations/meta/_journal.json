@@ -22,6 +22,13 @@
       "when": 1771176249832,
       "tag": "0002_curvy_groot",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1771226450054,
+      "tag": "0003_brave_machine_man",
+      "breakpoints": true
     }
   ]
 }
