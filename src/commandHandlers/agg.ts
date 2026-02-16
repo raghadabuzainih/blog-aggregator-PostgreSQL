@@ -1,6 +1,4 @@
 import { getFeeds, scrapeFeeds } from "src/lib/db/queries/feeds"
-import { fetchFeed } from "src/lib/rss/fetchFeed"
-import { printFeed } from "src/lib/rss/printFeed"
 
 export async function aggHandler(cmdName: string, ...args: string[]){
     if(!args[0]) throw new Error('time between requests is required')

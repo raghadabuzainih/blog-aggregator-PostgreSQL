@@ -12,6 +12,7 @@ import { followHandler } from './commandHandlers/follow.js'
 import { followingHandler } from './commandHandlers/following.js'
 import { getLoggedUserMiddleWare } from './shared/getLoggedUser.js'
 import { unFollowHandler } from './commandHandlers/unfollow.js'
+import { browsehandler } from './commandHandlers/browse.js'
 
 async function main() {
   let commandsRegistry: CommandsRegistry= {}
@@ -34,6 +35,7 @@ async function main() {
   await registerCommand(commandsRegistry, 'follow', await getLoggedUserMiddleWare(followHandler))
   await registerCommand(commandsRegistry, 'following', await getLoggedUserMiddleWare(followingHandler))
   await registerCommand(commandsRegistry, 'unfollow', await getLoggedUserMiddleWare(unFollowHandler))
+  await registerCommand(commandsRegistry, 'browse', await getLoggedUserMiddleWare(browsehandler))
 
   try {
     await runCommand(commandsRegistry, cmdName, ...cmdArgs);

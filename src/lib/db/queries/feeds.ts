@@ -5,6 +5,7 @@ import { fetchFeed } from "src/lib/rss/fetchFeed";
 import { parseFeed } from "src/lib/rss/parseFeed";
 import { printFeed } from "src/lib/rss/printFeed";
 import { Feed } from "src/types/feed";
+import { createPost } from "./posts";
 
 export async function createFeed(name: string, url: string, userId: string){
    return await db.insert(feeds).values({name, url, userID: userId}).returning()
@@ -56,5 +57,15 @@ export async function scrapeFeeds(){
     if(!feed) return 'feed not found'
     await markFeedFetched(feed.id)
     const feedByURL = await fetchFeed(feed.url)
-    await printFeed(feedByURL)
+    const rssFeed = await printFeed(feedByURL)
+    //insert posts
+    for(const post of rssFeed.channel.item){
+        await createPost({
+            url: post.link, 
+            feed_id: feed.id, 
+            title: post.title, 
+            description: post.description, 
+            published_at: new Date(post.pubDate)
+        })
+    }
 }

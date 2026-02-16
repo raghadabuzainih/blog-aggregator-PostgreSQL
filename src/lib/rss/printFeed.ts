@@ -19,7 +19,6 @@ export async function printFeed(feedString: string){
         if(Array.isArray(item)){
             for(const x of item){
                 const {title, link, description,pubDate} = x
-                console.log(x)
                 if(title && link && description && pubDate) 
                     items.push({title, link, description, pubDate}) 
             }
