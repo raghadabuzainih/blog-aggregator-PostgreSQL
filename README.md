@@ -2,8 +2,6 @@
 
 A command-line blog aggregation tool built with **TypeScript**, **Node.js**, and **PostgreSQL**.
 
-The application allows users to register, add RSS feeds, follow feeds, continuously scrape posts, browse the latest articles, etc.
-
 ---
 
 # Full Application Flow
@@ -18,14 +16,14 @@ The application allows users to register, add RSS feeds, follow feeds, continuou
    - Fetches RSS XML content.
    - Parses XML into structured JSON.
    - Extracts posts.
-   - Saves new posts into the database (avoiding duplicates).
+   - Saves new posts into the database.
 6. The user runs `browse` to read latest posts.
 
 ---
 
 # Command Responsibilities
-Note: You can run command using 'npm run <commandName>', for ex: npm run following
-Below is the responsibility of each command in the CLI:
+- Note: You can run command using 'npm run <commandName>', for ex: npm run following
+- Below is the responsibility of each command in the CLI:
 
 ## Authentication & User Management
 
@@ -46,23 +44,11 @@ Logs in an existing user.
 
 ---
 
-### users
+### users: Displays all registered users.
 
-Displays all registered users.
+### addfeed: Adds a new RSS feed (requires login).
 
----
-
-### addfeed
-
-Adds a new RSS feed (requires login).
-
----
-
-### feeds
-
-Displays all available feeds in the system.
-
----
+### feeds: Displays all available feeds in the system.
 
 ### follow
 
@@ -72,19 +58,9 @@ Allows a user to follow a feed.
 - Prevents duplicate follow relationships.
 - Enforces user-feed uniqueness constraint.
 
----
+### unfollow: Removes a follow relationship.
 
-### unfollow
-
-Removes a follow relationship.
-
----
-
-### following
-
-Displays feeds that the current user follows.
-
----
+### following: Displays feeds that the current user follows.
 
 ### agg
 
@@ -95,14 +71,9 @@ Starts continuous RSS scraping.
 - Immediately runs `scrapeFeeds`.
 - Runs scraper using `setInterval`.
 
----
-
-### browse
-
-Displays latest posts from followed feeds.
+### browse: Displays latest posts from followed feeds.
 
 ---
-
 
 # Tech Stack
 
